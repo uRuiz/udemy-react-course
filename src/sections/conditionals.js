@@ -1,29 +1,36 @@
 import React, { Component} from 'react';
 
+
+// Class Component
 class LoginButon extends Component {
 
-    onClickHandler = () => {
-        this.props.change();
+    onLoginHandler = (e) => {
+        e.preventDefault();
+        this.props.login();
     }
 
-
     render() {
-        return <button onClick={this.onClickHandler}>Iniciar Sesión</button>
+        return <button onClick={this.onLoginHandler}>Iniciar Sesión</button>
     }
 }
 
-class LogoutButton extends Component {
 
-    onClickHandler = () => {
-        this.props.change();
-    }
 
-    render() {
-        return <div>
-            <p>Bienvenido, {this.props.user}</p>
-            <button onClick={this.onClickHandler}>Log out</button>
+// Functional Component
+const LogoutButton = (props) => {
+
+    const onLogoutHandler = (e) => {
+        e.preventDefault();
+        props.changeHandler();
+    } 
+
+    return (
+        <div>
+            <p>Bienvenido, {props.user}</p>
+            <button onClick={onLogoutHandler}>Log out</button>
         </div>
-    }
+    )
+
 }
 
 
@@ -46,8 +53,8 @@ export default class ConditionalSection extends Component {
             <div>
                 <h1>Conditional Rendering</h1>
                 {this.state.isUserLogged
-                    ? <LogoutButton user="Urko" change={this.onClickHandler}/>
-                    : <LoginButon change={this.onClickHandler}/>
+                    ? <LogoutButton user="Urko" changeHandler={this.onClickHandler}/>
+                    : <LoginButon login={this.onClickHandler}/>
                 }
             </div>
         )
